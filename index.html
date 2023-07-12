@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Ma page HTML</title>
-</head>
-<body>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.10.6/dist/showdown.min.js"></script>
+  </head>
+  <body>
     <h1>Ma page HTML</h1>
-    
     <button id="myButton">Cliquez-moi !</button>
-
     <script>
         var button = document.getElementById("myButton");
         button.addEventListener("click", function() {
             alert("Hello, World !");
         });
     </script>
-</body>
+
+    <div id="markdown-content"></div>
+    <script>
+      const markdownFile = 'path/to/your/file.md';
+      const converter = new showdown.Converter();
+      const markdownContent = fetch(markdownFile)
+        .then(response => response.text())
+        .then(text => {
+          const html = converter.makeHtml(text);
+          document.getElementById('markdown-content').innerHTML = html;
+        });
+    </script>
+  </body>
 </html>
